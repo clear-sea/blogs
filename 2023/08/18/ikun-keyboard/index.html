@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>【教程&amp;整活】python第三方库pynput全局键盘监听+demo“ikun键盘” | 博客|清澈的海水</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="本篇文章主要讲pynput的键盘监听，以及一个demo“ikun键盘程序” 1.全局键盘监听1.1 pynput.keyboard.Listener这是pynput的子模块keyboard中的一个类，keyboard子模块都是关于键盘操作和监听的 Listener类有两个重要的构造参数，也是我们使用最多的: 1Listener(on_press&#x3D;按下按键时触发的函数,on_release&#x3D;松开按键">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【教程&amp;整活】python第三方库pynput全局键盘监听+demo“ikun键盘”">
+<meta property="og:url" content="http://clear-sea.github.io/blog/2023/08/18/ikun-keyboard/index.html">
+<meta property="og:site_name" content="博客|清澈的海水">
+<meta property="og:description" content="本篇文章主要讲pynput的键盘监听，以及一个demo“ikun键盘程序” 1.全局键盘监听1.1 pynput.keyboard.Listener这是pynput的子模块keyboard中的一个类，keyboard子模块都是关于键盘操作和监听的 Listener类有两个重要的构造参数，也是我们使用最多的: 1Listener(on_press&#x3D;按下按键时触发的函数,on_release&#x3D;松开按键">
+<meta property="og:locale" content="zh_CH">
+<meta property="article:published_time" content="2023-08-18T00:11:13.000Z">
+<meta property="article:modified_time" content="2023-08-18T00:32:30.240Z">
+<meta property="article:author" content="清澈的海水">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/blogs/atom.xml" title="博客|清澈的海水" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/blogs/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/blogs/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/blogs/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/blogs/" id="logo">博客|清澈的海水</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/blogs/">Home</a>
+        
+          <a class="main-nav-link" href="/blogs/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/blogs/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Suche"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Suche"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://clear-sea.github.io/blog"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-ikun-keyboard" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/blogs/2023/08/18/ikun-keyboard/" class="article-date">
+  <time class="dt-published" datetime="2023-08-18T00:11:13.000Z" itemprop="datePublished">2023-08-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      【教程&amp;整活】python第三方库pynput全局键盘监听+demo“ikun键盘”
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>本篇文章主要讲pynput的键盘监听，以及一个demo“ikun键盘程序”</p>
+<h1 id="1-全局键盘监听"><a href="#1-全局键盘监听" class="headerlink" title="1.全局键盘监听"></a>1.全局键盘监听</h1><h2 id="1-1-pynput-keyboard-Listener"><a href="#1-1-pynput-keyboard-Listener" class="headerlink" title="1.1 pynput.keyboard.Listener"></a>1.1 pynput.keyboard.Listener</h2><p>这是pynput的子模块keyboard中的一个类，keyboard子模块都是关于键盘操作和监听的</p>
+<p>Listener类有两个重要的构造参数，也是我们使用最多的:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Listener(on_press=按下按键时触发的函数,on_release=松开按键时触发的函数)</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+<p>一般在程序中我们这么使用：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> keyboard.Listener(on_press=按下按键触发的函数,on_release=松开按键触发的函数) <span class="keyword">as</span> listener:</span><br><span class="line">    listener.join()</span><br></pre></td></tr></table></figure>
+
+<p>按下或者松开按键所触发的函数还有一个参数用来接收按键信息，我一般用key作为参数名<br>listener.join()是线程阻塞函数，它会让这块代码所在的函数始终监听键盘，所以如果有其他需要阻塞线程或者使用主循环的函数（比如rkinter的mainloop()函数）应该使用多线程</p>
+<p>举个例子：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pynput <span class="keyword">import</span> keyboard<span class="comment">#首先导入模块</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">key_press</span>(<span class="params">key</span>):<span class="comment">#定义按键按下时触发的函数</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;按键被按下了&quot;</span>)</span><br><span class="line">    </span><br><span class="line"><span class="keyword">def</span> <span class="title function_">key_release</span>(<span class="params">key</span>):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;按键被松开了&quot;</span>)</span><br><span class="line">    </span><br><span class="line"><span class="keyword">with</span> keyboard.Listener(on_press=key_press,on_release=key_release) <span class="keyword">as</span> listener:</span><br><span class="line">    listener.join()</span><br></pre></td></tr></table></figure>
+
+<h2 id="1-2获取背按下或者被松开的按键"><a href="#1-2获取背按下或者被松开的按键" class="headerlink" title="1.2获取背按下或者被松开的按键"></a>1.2获取背按下或者被松开的按键</h2><p>此时被的触发函数接收的参数key派上了用途。如果是普通按键（就是字母或数字之类），key会有一个叫做char的属性，char本身是一个python字符串，我们可以判断字符串从而得知按下或者松开了哪个键。</p>
+<p>举个例子：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pynput <span class="keyword">import</span> keyboard<span class="comment">#首先导入模块</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">key_press</span>(<span class="params">key</span>):<span class="comment">#定义按键按下时触发的函数</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;按键<span class="subst">&#123;key.char&#125;</span>被按下了&quot;</span>)</span><br><span class="line">    </span><br><span class="line"><span class="keyword">def</span> <span class="title function_">key_release</span>(<span class="params">key</span>):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;按键<span class="subst">&#123;key.char&#125;</span>被松开了&quot;</span>)</span><br><span class="line">    </span><br><span class="line"><span class="keyword">with</span> keyboard.Listener(on_press=key_press,on_release=key_release) <span class="keyword">as</span> listener:</span><br><span class="line">    listener.join()</span><br></pre></td></tr></table></figure>
+
+<p>但是还有特殊按键的存在呢！比如说ctrl、alt、shift等，如果按下或松开这种特殊按键，传入的key可就不一样了，它没有char属性，所以会报错AttributeError: ‘Key’ object has no attribute ‘char’ 于是我们可以用try…except语句，如果程序没遇到AttributeErro，就按普通按键处理，如果遇到了，就是特殊按键，而特殊按键可以在keyboard模块的Key中找到它们的“尊姓大名”，比如keyboard.Key.esc</p>
+<p>下面请看例子：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pynput <span class="keyword">import</span> keyboard<span class="comment">#首先导入模块</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">def</span> <span class="title function_">key_press</span>(<span class="params">key</span>):<span class="comment">#定义按键按下时触发的函数</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;按键<span class="subst">&#123;key.char&#125;</span>被按下了&quot;</span>)</span><br><span class="line">    <span class="keyword">except</span> AttributeError:</span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">def</span> <span class="title function_">key_release</span>(<span class="params">key</span>):</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;按键<span class="subst">&#123;key.char&#125;</span>被松开了&quot;</span>)</span><br><span class="line">    <span class="keyword">except</span> AttributeError:</span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">with</span> keyboard.Listener(on_press=key_press,on_release=key_release) <span class="keyword">as</span> listener:</span><br><span class="line">    listener.join()</span><br></pre></td></tr></table></figure>
+
+<p>这样按下特殊按键不会报错了</p>
+<h2 id="1-3-组合键监听-特殊转义字符"><a href="#1-3-组合键监听-特殊转义字符" class="headerlink" title="1.3 组合键监听-特殊转义字符"></a>1.3 组合键监听-特殊转义字符</h2><p>pynput可以监听很多组合键，并且给触发的函数传入转义字符，例如&lt;48&gt;是表示ctrl+0<br>注意，使用组合键监听需要keyboard模块的另外一员大将– Controller。</p>
+<p>下面看例子：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pynput.keyboard <span class="keyword">import</span> Key, Controller,Listener</span><br><span class="line">keyboard = Controller()</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">on_press</span>(<span class="params">key</span>):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;&#123;0&#125; 被按下&#x27;</span>.<span class="built_in">format</span>(key)) </span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line"><span class="keyword">def</span> <span class="title function_">on_release</span>(<span class="params">key</span>):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;&#123;0&#125; 被释放&#x27;</span>.<span class="built_in">format</span>(key))</span><br><span class="line">    <span class="keyword">if</span> key == Key.esc:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">str</span>(key) == <span class="string">r&quot;&lt;48&gt;&quot;</span>:<span class="comment"># ctrl 0</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;按下ctrl 0,运行测试程序&#x27;</span>)</span><br><span class="line">    </span><br><span class="line"><span class="comment"># 创建监听</span></span><br><span class="line"><span class="keyword">with</span> Listener(on_press=on_press,on_release=on_release) <span class="keyword">as</span> listener:</span><br><span class="line">    listener.join()</span><br></pre></td></tr></table></figure>
+
+<p>组合键键值表如下（<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_35995691/article/details/124748403">摘自Python中的pynput中组合键的键值_一个小坑货的博客-CSDN博客_pynput 组合键</a>）：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line">keyboard_key_dict = &#123;</span><br><span class="line">    <span class="string">r&quot;&#x27;\x01&#x27;&quot;</span> : [<span class="string">&#x27;ctrl&#x27;</span>,<span class="string">&#x27;a&#x27;</span>],</span><br><span class="line">    <span class="string">r&quot;&#x27;\x02&#x27;&quot;</span> : [<span class="string">&#x27;ctrl&#x27;</span>,<span class="string">&#x27;b&#x27;</span>],</span><br><span class="line">    <span class="string">r&quot;&#x27;\x03&#x27;&quot;</span> : [<span class="string">&#x27;ctrl&#x27;</span>,<span class="string">&#x27;c&#x27;</span>],</span><br><span class="line">    <span class="string">r&quot;&#x27;\x04&#x27;&quot;</span> : [<span class="string">&#x27;ctrl&#x27;</span>,<span class="string">&#x27;d&#x27;</span>],</span><br><span class="line">    <span class="string">r&quot;&#x27;\x05&#x27;&quot;</span> : [<span class="string">&#x27;ctrl&#x27;</span>,<span class="string">&#x27;e&#x27;</span>],</span><br><span class="line">    <span class="string">r&quot;&#x27;\x06&#x27;&quot;</span> : [<span class="string">&#x27;ctrl&#x27;</span>,<span class="string">&#x27;f&#x27;</span>],</span><br><span class="line">    <span class="string">r&quot;&#x27;\x07&#x27;&quot;</span> : [<span class="string">&#x27;ctrl&#x27;</span>,<span class="string">&#x27;g&#x27;</span>],</span><br><span class="line">    <span class="string">r&quot;&#x27;\x08&#x27;&quot;</span> : [<span class="string">&#x27;ctrl&#x27;</span>,<span class="string">&#x27;h&#x27;</span>],</span><br><span class="line">    <span class="string">r&quot;&#x27;\t&#x27;&quot;</span>   : [<span class="string">&#x27;ctrl&#x27;</span>,<span class="string">&#x27;i&#x27;</span>],</span><br><span class="line">    <span class="string">r&quot;&#x27;\n&#x27;&quot;</span>   : [<span class="string">&#x27;ctrl&#x27;</span>,<span class="string">&#x27;j&#x27;</span>],</span><br><span class="line">    <span class="string">r&quot;&#x27;\x0b&#x27;&quot;</span> : [<span class="string">&#x27;ctrl&#x27;</span>,<span class="string">&#x27;k&#x27;</span>],</span><br><span class="line">    <span class="string">r&quot;&#x27;\x0c&#x27;&quot;</span> : [<span class="string">&#x27;ctrl&#x27;</span>,<span class="string">&#x27;l&#x27;</span>],</span><br><span class="line">    <span class="string">r&quot;&#x27;\r&#x27;&quot;</span>   : [<span class="string">&#x27;ctrl&#x27;</span>,<span class="string">&#x27;m&#x27;</span>],</span><br><span class="line">    <span class="string">r&quot;&#x27;\x0e&#x27;&quot;</span> : [<span class="string">&#x27;ctrl&#x27;</span>,<span class="string">&#x27;n&#x27;</span>],</span><br><span class="line">    <span class="string">r&quot;&#x27;\x0f&#x27;&quot;</span> : [<span class="string">&#x27;ctrl&#x27;</span>,<span class="string">&#x27;o&#x27;</span>],</span><br><span class="line">    <span class="string">r&quot;&#x27;\x10&#x27;&quot;</span> : [<span class="string">&#x27;ctrl&#x27;</span>,<span class="string">&#x27;p&#x27;</span>],</span><br><span class="line">    <span class="string">r&quot;&#x27;\x11&#x27;&quot;</span> : [<span class="string">&#x27;ctrl&#x27;</span>,<span class="string">&#x27;q&#x27;</span>],</span><br><span class="line">    <span class="string">r&quot;&#x27;\x12&#x27;&quot;</span> : [<span class="string">&#x27;ctrl&#x27;</span>,<span class="string">&#x27;r&#x27;</span>],</span><br><span class="line">    <span class="string">r&quot;&#x27;\x13&#x27;&quot;</span> : [<span class="string">&#x27;ctrl&#x27;</span>,<span class="string">&#x27;s&#x27;</span>],</span><br><span class="line">    <span class="string">r&quot;&#x27;\x14&#x27;&quot;</span> : [<span class="string">&#x27;ctrl&#x27;</span>,<span class="string">&#x27;t&#x27;</span>],</span><br><span class="line">    <span class="string">r&quot;&#x27;\x15&#x27;&quot;</span> : [<span class="string">&#x27;ctrl&#x27;</span>,<span class="string">&#x27;u&#x27;</span>],</span><br><span class="line">    <span class="string">r&quot;&#x27;\x16&#x27;&quot;</span> : [<span class="string">&#x27;ctrl&#x27;</span>,<span class="string">&#x27;v&#x27;</span>],</span><br><span class="line">    <span class="string">r&quot;&#x27;\x17&#x27;&quot;</span> : [<span class="string">&#x27;ctrl&#x27;</span>,<span class="string">&#x27;w&#x27;</span>],</span><br><span class="line">    <span class="string">r&quot;&#x27;\x18&#x27;&quot;</span> : [<span class="string">&#x27;ctrl&#x27;</span>,<span class="string">&#x27;x&#x27;</span>],</span><br><span class="line">    <span class="string">r&quot;&#x27;\x19&#x27;&quot;</span> : [<span class="string">&#x27;ctrl&#x27;</span>,<span class="string">&#x27;y&#x27;</span>],</span><br><span class="line">    <span class="string">r&quot;&#x27;\x1a&#x27;&quot;</span> : [<span class="string">&#x27;ctrl&#x27;</span>,<span class="string">&#x27;z&#x27;</span>],</span><br><span class="line">    <span class="string">r&quot;&#x27;\x1f&#x27;&quot;</span> : [<span class="string">&#x27;ctrl&#x27;</span>,<span class="string">&#x27;shift&#x27;</span>,<span class="string">&#x27;-&#x27;</span>],</span><br><span class="line">    <span class="string">r&quot;&lt;186&gt;&quot;</span>  : [<span class="string">&#x27;ctrl&#x27;</span>,<span class="string">&#x27;;&#x27;</span>],</span><br><span class="line">    <span class="string">r&quot;&lt;187&gt;&quot;</span>  : [<span class="string">&#x27;ctrl&#x27;</span>,<span class="string">&#x27;=&#x27;</span>],</span><br><span class="line">    <span class="string">r&quot;&lt;189&gt;&quot;</span>  : [<span class="string">&#x27;ctrl&#x27;</span>,<span class="string">&#x27;-&#x27;</span>],</span><br><span class="line">    <span class="string">r&quot;&lt;192&gt;&quot;</span>  : [<span class="string">&#x27;ctrl&#x27;</span>,<span class="string">&#x27;`&#x27;</span>],</span><br><span class="line">    <span class="string">r&quot;&lt;222&gt;&quot;</span>  : [<span class="string">&#x27;ctrl&#x27;</span>,<span class="string">r&quot;&#x27;&quot;</span>],</span><br><span class="line">    <span class="string">r&quot;&lt;48&gt;&quot;</span>   : [<span class="string">&#x27;ctrl&#x27;</span>,<span class="string">&#x27;0&#x27;</span>],</span><br><span class="line">    <span class="string">r&quot;&lt;49&gt;&quot;</span>   : [<span class="string">&#x27;ctrl&#x27;</span>,<span class="string">&#x27;1&#x27;</span>],</span><br><span class="line">    <span class="string">r&quot;&lt;50&gt;&quot;</span>   : [<span class="string">&#x27;ctrl&#x27;</span>,<span class="string">&#x27;2&#x27;</span>],</span><br><span class="line">    <span class="string">r&quot;&lt;51&gt;&quot;</span>   : [<span class="string">&#x27;ctrl&#x27;</span>,<span class="string">&#x27;3&#x27;</span>],</span><br><span class="line">    <span class="string">r&quot;&lt;52&gt;&quot;</span>   : [<span class="string">&#x27;ctrl&#x27;</span>,<span class="string">&#x27;4&#x27;</span>],</span><br><span class="line">    <span class="string">r&quot;&lt;53&gt;&quot;</span>   : [<span class="string">&#x27;ctrl&#x27;</span>,<span class="string">&#x27;5&#x27;</span>],</span><br><span class="line">    <span class="string">r&quot;&lt;54&gt;&quot;</span>   : [<span class="string">&#x27;ctrl&#x27;</span>,<span class="string">&#x27;6&#x27;</span>],</span><br><span class="line">    <span class="string">r&quot;&lt;55&gt;&quot;</span>   : [<span class="string">&#x27;ctrl&#x27;</span>,<span class="string">&#x27;7&#x27;</span>],</span><br><span class="line">    <span class="string">r&quot;&lt;56&gt;&quot;</span>   : [<span class="string">&#x27;ctrl&#x27;</span>,<span class="string">&#x27;8&#x27;</span>],</span><br><span class="line">    <span class="string">r&quot;&lt;57&gt;&quot;</span>   : [<span class="string">&#x27;ctrl&#x27;</span>,<span class="string">&#x27;9&#x27;</span>],</span><br><span class="line">    <span class="string">r&quot;&#x27;~&#x27;&quot;</span>    : [<span class="string">&#x27;shift&#x27;</span>, <span class="string">&#x27;`&#x27;</span>],</span><br><span class="line">    <span class="string">r&quot;&#x27;!&#x27;&quot;</span>    : [<span class="string">&#x27;shift&#x27;</span>, <span class="string">&#x27;1&#x27;</span>],</span><br><span class="line">    <span class="string">r&quot;&#x27;@&#x27;&quot;</span>    : [<span class="string">&#x27;shift&#x27;</span>, <span class="string">&#x27;2&#x27;</span>],</span><br><span class="line">    <span class="string">r&quot;&#x27;#&#x27;&quot;</span>    : [<span class="string">&#x27;shift&#x27;</span>, <span class="string">&#x27;3&#x27;</span>],</span><br><span class="line">    <span class="string">r&quot;&#x27;$&#x27;&quot;</span>    : [<span class="string">&#x27;shift&#x27;</span>, <span class="string">&#x27;4&#x27;</span>],</span><br><span class="line">    <span class="string">r&quot;&#x27;%&#x27;&quot;</span>    : [<span class="string">&#x27;shift&#x27;</span>, <span class="string">&#x27;5&#x27;</span>],</span><br><span class="line">    <span class="string">r&quot;&#x27;^&#x27;&quot;</span>    : [<span class="string">&#x27;shift&#x27;</span>, <span class="string">&#x27;6&#x27;</span>],</span><br><span class="line">    <span class="string">r&quot;&#x27;*&#x27;&quot;</span>    : [<span class="string">&#x27;shift&#x27;</span>, <span class="string">&#x27;7&#x27;</span>],</span><br><span class="line">    <span class="string">r&quot;&#x27;(&#x27;&quot;</span>    : [<span class="string">&#x27;shift&#x27;</span>, <span class="string">&#x27;8&#x27;</span>],</span><br><span class="line">    <span class="string">r&quot;&#x27;)&#x27;&quot;</span>    : [<span class="string">&#x27;shift&#x27;</span>, <span class="string">&#x27;9&#x27;</span>],</span><br><span class="line">    <span class="string">r&quot;&#x27;_&#x27;&quot;</span>    : [<span class="string">&#x27;shift&#x27;</span>, <span class="string">&#x27;-&#x27;</span>],</span><br><span class="line">    <span class="string">r&quot;&#x27;+&#x27;&quot;</span>    : [<span class="string">&#x27;shift&#x27;</span>, <span class="string">&#x27;=&#x27;</span>],</span><br><span class="line">    <span class="string">r&quot;&#x27;:&#x27;&quot;</span>    : [<span class="string">&#x27;shift&#x27;</span>, <span class="string">&#x27;;&#x27;</span>],</span><br><span class="line">    <span class="string">r&quot;&#x27;\&quot;&#x27;&quot;</span>   : [<span class="string">&#x27;shift&#x27;</span>, <span class="string">&quot;&#x27;&quot;</span>],</span><br><span class="line">    <span class="string">r&quot;&#x27;&lt;&#x27;&quot;</span>    : [<span class="string">&#x27;shift&#x27;</span>, <span class="string">&quot;,&quot;</span>],</span><br><span class="line">    <span class="string">r&quot;&#x27;&#123;&#x27;&quot;</span>    : [<span class="string">&#x27;shift&#x27;</span>, <span class="string">&quot;[&quot;</span>],</span><br><span class="line">    <span class="string">r&quot;&#x27;&#125;&#x27;&quot;</span>    : [<span class="string">&#x27;shift&#x27;</span>, <span class="string">&quot;]&quot;</span>],</span><br><span class="line">    <span class="string">r&quot;&#x27;|&#x27;&quot;</span>    : [<span class="string">&#x27;shift&#x27;</span>, <span class="string">&quot;\\&quot;</span>],</span><br><span class="line">    <span class="string">r&quot;&#x27;?&#x27;&quot;</span>    : [<span class="string">&#x27;shift&#x27;</span>, <span class="string">&quot;/&quot;</span>],</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="1-4-keyboard-GlobalHotkey热键"><a href="#1-4-keyboard-GlobalHotkey热键" class="headerlink" title="1.4 keyboard.GlobalHotkey热键"></a>1.4 keyboard.GlobalHotkey热键</h2><p>这个类需要以一个字典为参数，字典结构是{“热键”:触发函数}，热键名是字符串，如果拼写不正确是会报错的</p>
+<p>举例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pynput <span class="keyword">import</span> keyboard</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">one</span>():</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;按下了ctrl+t&quot;</span>)</span><br><span class="line">    </span><br><span class="line"><span class="keyword">def</span> <span class="title function_">two</span>():</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;按下了ctrl+shift&quot;</span>)</span><br><span class="line">    </span><br><span class="line"><span class="keyword">with</span> keyboard.GlobalHotKeys(&#123;<span class="string">&quot;+t&quot;</span>:one,<span class="string">&quot;+&quot;</span>:two&#125;) <span class="keyword">as</span> listener:</span><br><span class="line">    listener.join()</span><br></pre></td></tr></table></figure>
+
+<h1 id="2-ikun专属键盘（滑稽）"><a href="#2-ikun专属键盘（滑稽）" class="headerlink" title="2. ikun专属键盘（滑稽）"></a>2. ikun专属键盘（滑稽）</h1><p>（提示：适当玩梗，笑梗不笑人，demo仅供学习需要）<br>音频播放我们使用playsound模块，可以直接pip安装，音频文件请自备</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pynput <span class="keyword">import</span> keyboard<span class="comment">#首先导入模块</span></span><br><span class="line"><span class="keyword">import</span> playsound</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">press</span>(<span class="params">key</span>):</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="built_in">print</span>(key.char)<span class="comment">#调试输出</span></span><br><span class="line"> </span><br><span class="line">        <span class="keyword">if</span> key.char==<span class="string">&quot;j&quot;</span>:</span><br><span class="line">            playsound.playsound(<span class="string">&quot;J.mp3&quot;</span>)</span><br><span class="line">        <span class="keyword">elif</span> key.char==<span class="string">&quot;n&quot;</span>:</span><br><span class="line">            playsound.playsound(<span class="string">&quot;n.mp3&quot;</span>)</span><br><span class="line">        <span class="keyword">elif</span> key.char==<span class="string">&quot;t&quot;</span>:</span><br><span class="line">            playsound.playsound(<span class="string">&quot;t.mp3&quot;</span>)</span><br><span class="line">        <span class="keyword">elif</span> key.char==<span class="string">&quot;m&quot;</span>:</span><br><span class="line">            playsound.playsound(<span class="string">&quot;m.mp3&quot;</span>)</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">except</span> AttributeError:</span><br><span class="line">        <span class="keyword">if</span> key==keyboard.Key.ctrl <span class="keyword">or</span> key==keyboard.Key.ctrl_l <span class="keyword">or</span> key==keyboard.Key.ctrl_r:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;唱跳rap篮球&quot;</span>)</span><br><span class="line">            playsound.playsound(<span class="string">&quot;ctrl.mp3&quot;</span>)</span><br><span class="line"> </span><br><span class="line"><span class="keyword">with</span> keyboard.Listener(on_press=press) <span class="keyword">as</span> listener:</span><br><span class="line">    listener.join()</span><br></pre></td></tr></table></figure>
+
+<p>这样就有了一个可以挂在后台的ikun键盘程序，可以根据个人喜好完善，还可以放进开机自启动文件夹中（滑稽</p>
+<p>完整项目（含音频文件），给颗star吧:<a target="_blank" rel="noopener" href="https://github.com/clear-sea/ikun-keyboard">GitHub完整项目</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://clear-sea.github.io/blog/2023/08/18/ikun-keyboard/" data-id="cllfuwlko0002q4v5abz6fb9u" data-title="【教程&amp;整活】python第三方库pynput全局键盘监听+demo“ikun键盘”" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/blogs/2023/08/18/cpp-stack/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Neuer</strong>
+      <div class="article-nav-title">
+        
+          【C++笔记】数据结构之——栈
+        
+      </div>
+    </a>
+  
+  
+    <a href="/blogs/2023/08/18/hello-hexo/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Älter</strong>
+      <div class="article-nav-title">你好，Hexo</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blogs/archives/2023/08/">August 2023</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">letzter Beitrag</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/blogs/2023/08/18/learn-markdown/">【随笔】MarkDown基础</a>
+          </li>
+        
+          <li>
+            <a href="/blogs/2023/08/18/cpp-stack/">【C++笔记】数据结构之——栈</a>
+          </li>
+        
+          <li>
+            <a href="/blogs/2023/08/18/ikun-keyboard/">【教程&amp;整活】python第三方库pynput全局键盘监听+demo“ikun键盘”</a>
+          </li>
+        
+          <li>
+            <a href="/blogs/2023/08/18/hello-hexo/">你好，Hexo</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 清澈的海水<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/blogs/" class="mobile-nav-link">Home</a>
+  
+    <a href="/blogs/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/blogs/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/blogs/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/blogs/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
