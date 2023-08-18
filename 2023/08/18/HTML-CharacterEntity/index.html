@@ -4,16 +4,19 @@
   <meta charset="utf-8">
   
   
-  <title>Archiv: 2023 | 博客|清澈的海水</title>
+  <title>【前端\&amp;随笔】HTML字符实体 | 博客|清澈的海水</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="清澈的海水clear-sea的个人博客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="博客|清澈的海水">
-<meta property="og:url" content="http://clear-sea.github.io/blog/archives/2023/index.html">
+  <meta name="description" content="字符实体在HTML中，大于号、小于号等符号都是特殊符号，因为它们会被浏览器当做标签处理；如果想在网页上显示出这些符号，就需要用到字符实体(character entities)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【前端\&amp;随笔】HTML字符实体">
+<meta property="og:url" content="http://clear-sea.github.io/blog/2023/08/18/HTML-CharacterEntity/index.html">
 <meta property="og:site_name" content="博客|清澈的海水">
-<meta property="og:description" content="清澈的海水clear-sea的个人博客">
+<meta property="og:description" content="字符实体在HTML中，大于号、小于号等符号都是特殊符号，因为它们会被浏览器当做标签处理；如果想在网页上显示出这些符号，就需要用到字符实体(character entities)">
 <meta property="og:locale" content="zh_CH">
+<meta property="article:published_time" content="2023-08-18T08:45:04.000Z">
+<meta property="article:modified_time" content="2023-08-18T09:19:02.452Z">
 <meta property="article:author" content="清澈的海水">
+<meta property="article:tag" content="HTML">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/blogs/atom.xml" title="博客|清澈的海水" type="application/atom+xml">
@@ -73,153 +76,174 @@
 </header>
 
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/blogs/archives/2023" class="archive-year">2023</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/blogs/2023/08/18/electronic-WoodFish/" class="archive-article-date">
-  <time class="dt-published" datetime="2023-08-18T09:15:11.000Z" itemprop="datePublished">Aug 18</time>
+        <section id="main"><article id="post-HTML-CharacterEntity" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/blogs/2023/08/18/HTML-CharacterEntity/" class="article-date">
+  <time class="dt-published" datetime="2023-08-18T08:45:04.000Z" itemprop="datePublished">2023-08-18</time>
 </a>
-      
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/blogs/2023/08/18/electronic-WoodFish/">【整活】C++结合EasyX电子木鱼</a>
+    <h1 class="p-name article-title" itemprop="headline name">
+      【前端\&amp;随笔】HTML字符实体
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
+      </header>
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/blogs/2023/08/18/HTML-CharacterEntity/" class="archive-article-date">
-  <time class="dt-published" datetime="2023-08-18T08:45:04.000Z" itemprop="datePublished">Aug 18</time>
-</a>
+    <div class="e-content article-entry" itemprop="articleBody">
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/blogs/2023/08/18/HTML-CharacterEntity/">【前端\&amp;随笔】HTML字符实体</a>
-    </h1>
-  
+        <h1 id="字符实体"><a href="#字符实体" class="headerlink" title="字符实体"></a>字符实体</h1><p>在HTML中，大于号、小于号等符号都是特殊符号，因为它们会被浏览器当做标签处理；如果想在网页上显示出这些符号，就需要用到字符实体(character entities)</p>
+<span id="more"></span>
+<h1 id="常用的字符实体"><a href="#常用的字符实体" class="headerlink" title="常用的字符实体"></a>常用的字符实体</h1><p>注：实体名称对大小写敏感！</p>
+<table>
+<thead>
+<tr>
+<th>显示结果</th>
+<th>描述</th>
+<th>实体名称</th>
+<th>实体编号</th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td>空格</td>
+<td>&amp;nbsp;</td>
+<td>&amp;#160;</td>
+</tr>
+<tr>
+<td>&lt;</td>
+<td>小于号</td>
+<td>&amp;lt;</td>
+<td>&amp;#60;</td>
+</tr>
+<tr>
+<td>&gt;</td>
+<td>大于号</td>
+<td>&amp;gt;</td>
+<td>&amp;#62;</td>
+</tr>
+<tr>
+<td>&amp;</td>
+<td>和号</td>
+<td>&amp;amp;</td>
+<td>&amp;#38;</td>
+</tr>
+<tr>
+<td>“</td>
+<td>引号</td>
+<td>&amp;quot;</td>
+<td>&amp;#34;</td>
+</tr>
+<tr>
+<td>‘</td>
+<td>撇号</td>
+<td>&amp;apos; (IE不支持)</td>
+<td>&amp;#39;</td>
+</tr>
+<tr>
+<td>￠</td>
+<td>分（cent）</td>
+<td>&amp;cent;</td>
+<td>&amp;#162;</td>
+</tr>
+<tr>
+<td>£</td>
+<td>镑（pound）</td>
+<td>&amp;pound;</td>
+<td>&amp;#163;</td>
+</tr>
+<tr>
+<td>¥</td>
+<td>元（yen）</td>
+<td>&amp;yen;</td>
+<td>&amp;#165;</td>
+</tr>
+<tr>
+<td>€</td>
+<td>欧元（euro）</td>
+<td>&amp;euro;</td>
+<td>&amp;#8364;</td>
+</tr>
+<tr>
+<td>§</td>
+<td>小节</td>
+<td>&amp;sect;</td>
+<td>&amp;#167;</td>
+</tr>
+<tr>
+<td>©</td>
+<td>版权（copyright）</td>
+<td>&amp;copy;</td>
+<td>&amp;#169;</td>
+</tr>
+<tr>
+<td>®</td>
+<td>注册商标</td>
+<td>&amp;reg;</td>
+<td>&amp;#174;</td>
+</tr>
+<tr>
+<td>™</td>
+<td>商标</td>
+<td>&amp;trade;</td>
+<td>&amp;#8482;</td>
+</tr>
+<tr>
+<td>×</td>
+<td>乘号</td>
+<td>&amp;times;</td>
+<td>&amp;#215;</td>
+</tr>
+<tr>
+<td>÷</td>
+<td>除号</td>
+<td>&amp;divide;</td>
+<td>&amp;#247;</td>
+</tr>
+</tbody></table>
+<p><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/html/html_entities.asp">W3C官网对字符实体的解释</a></p>
+<p>可以在W3C官网查看完整的<a target="_blank" rel="noopener" href="https://www.w3school.com.cn/charsets/ref_html_8859.asp">HTML实体符号参考手册</a></p>
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/blogs/2023/08/18/help-vscode-plugins/" class="archive-article-date">
-  <time class="dt-published" datetime="2023-08-18T08:41:20.000Z" itemprop="datePublished">Aug 18</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/blogs/2023/08/18/help-vscode-plugins/">【随笔】VSCode离线下载扩展</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/blogs/2023/08/18/learn-markdown/" class="archive-article-date">
-  <time class="dt-published" datetime="2023-08-18T00:34:43.000Z" itemprop="datePublished">Aug 18</time>
-</a>
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://clear-sea.github.io/blog/2023/08/18/HTML-CharacterEntity/" data-id="cllgdny1j00011sv57ildhezu" data-title="【前端\&amp;随笔】HTML字符实体" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/blogs/2023/08/18/learn-markdown/">【随笔】MarkDown基础</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/blogs/2023/08/18/cpp-stack/" class="archive-article-date">
-  <time class="dt-published" datetime="2023-08-18T00:26:33.000Z" itemprop="datePublished">Aug 18</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/blogs/2023/08/18/cpp-stack/">【C++笔记】数据结构之——栈</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/blogs/2023/08/18/ikun-keyboard/" class="archive-article-date">
-  <time class="dt-published" datetime="2023-08-18T00:11:13.000Z" itemprop="datePublished">Aug 18</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/blogs/2023/08/18/ikun-keyboard/">【教程&amp;整活】python第三方库pynput全局键盘监听+demo“ikun键盘”</a>
-    </h1>
-  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blogs/tags/HTML/" rel="tag">HTML</a></li></ul>
 
-    </header>
+    </footer>
   </div>
-</article>
   
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/blogs/2023/08/18/hello-hexo/" class="archive-article-date">
-  <time class="dt-published" datetime="2023-08-18T00:06:52.000Z" itemprop="datePublished">Aug 18</time>
-</a>
-      
+<nav id="article-nav">
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/blogs/2023/08/18/hello-hexo/">你好，Hexo</a>
-    </h1>
+    <a href="/blogs/2023/08/18/electronic-WoodFish/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Neuer</strong>
+      <div class="article-nav-title">
+        
+          【整活】C++结合EasyX电子木鱼
+        
+      </div>
+    </a>
   
+  
+    <a href="/blogs/2023/08/18/help-vscode-plugins/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Älter</strong>
+      <div class="article-nav-title">【随笔】VSCode离线下载扩展</div>
+    </a>
+  
+</nav>
 
-    </header>
-  </div>
+  
 </article>
-  
-  
-    </div></section>
-  
 
 
 </section>
